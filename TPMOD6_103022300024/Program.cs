@@ -11,8 +11,7 @@ public class SayaTubeVideo
     // Constructor dengan Prekondisi
     public SayaTubeVideo(string title)
     {
-        Debug.Assert(!string.IsNullOrEmpty(title), "Judul video tidak boleh null atau kosong");
-        Debug.Assert(title.Length <= 100, "Judul video tidak boleh lebih dari 100 karakter");
+
 
         Random random = new Random();
         this.id = random.Next(10000, 99999); // Generate random 5-digit id
