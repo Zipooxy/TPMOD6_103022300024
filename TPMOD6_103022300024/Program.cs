@@ -11,6 +11,8 @@ public class SayaTubeVideo
     // Constructor dengan Prekondisi
     public SayaTubeVideo(string title)
     {
+        Debug.Assert(!string.IsNullOrEmpty(title), "Judul video tidak boleh null atau kosong");
+        Debug.Assert(title.Length <= 100, "Judul video tidak boleh lebih dari 100 karakter");
 
 
         Random random = new Random();
@@ -45,6 +47,33 @@ public class SayaTubeVideo
         Console.WriteLine($"Title: {this.title}");
         Console.WriteLine($"Play Count: {this.playCount}");
         Console.WriteLine("==========================");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            // Menguji prekondisi (judul valid dan panjang tidak lebih dari 100 karakter)
+            SayaTubeVideo video = new SayaTubeVideo("Tutorial Design By Contract – jack kelvin G.R");
+            video.PrintVideoDetails();
+
+            // Menguji batas maksimal play count (valid input)
+            video.IncreasePlayCount(10000000);
+            video.PrintVideoDetails();
+
+            // Menguji exception overflow dengan loop
+            for (int i = 0; i < 50; i++)
+            {
+                video.IncreasePlayCount(10000000); // Loop untuk memaksa overflow
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Terjadi kesalahan: " + ex.Message);
+        }
     }
 }
 
